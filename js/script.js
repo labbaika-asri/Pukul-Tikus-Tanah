@@ -35,7 +35,7 @@ function munculkanTikus(tanah) {
 
 function mulai() {
     selesai = false;
-    skor = 0;
+    score = 0;
     papanSkor.textContent = 0;
     munculkanTikus(tanah);
     setTimeout(() => {
@@ -47,8 +47,8 @@ function pukul() {
     if (this.parentNode.classList.contains("muncul")) {
         pop.play();
         this.parentNode.classList.remove("muncul");
-        skor++;
-        papanSkor.textContent = skor;
+        score++;
+        papanSkor.textContent = scores;
     }
 }
 
