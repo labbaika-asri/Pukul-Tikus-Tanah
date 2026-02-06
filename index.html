@@ -23,12 +23,15 @@
                 </template>
             </div>
             <audio src="audio/Pop.mp3" x-ref="pop"></audio>
+            <h3>Waktu: <span x-text="waktu"></span></h3>
         </div>
         <script>
             const whackGame = () => ({
                 tanah: Array.from({ length: 6 }, () => ({ muncul: false })), // Lobang tanah
                 tanahSebelumnya: null,
                 skor: 0,
+                waktu: 10,
+                timerInterval: null,
                 // Mengacak tanah yang akan muncul tikus dan tidak boleh sama dengan sebelumnya
                 randomTanah() {
                     let index;
@@ -59,9 +62,19 @@
                 mulai() {
                     this.selesai = false;
                     this.skor = 0;
+                    this.waktu = 10;
+
                     this.tanah.forEach((t) => (t.muncul = false));
                     this.munculkanTikus();
-                    setTimeout(() => (this.selesai = true), 10000);
+                    clearInterval(this.timerInterval);
+                    this.timerInterval = setInterval(() => {
+                        this.waktu--;
+                        if (this.waktu <= 0) {
+                            this.waktu = 0;
+                            this.selesai = true;
+                            clearInterval(this.timerInterval);
+                        }
+                    }, 1000);
                 },
 
                 pukul(index) {
