@@ -118,3 +118,47 @@ button.mulai:active {
 .tanah.muncul .tikus {
     top: -10%;
 }
+
+.tanah.hit {
+    /* animation: hitFlash 0.15s ease-in-out; */
+    animation: hitPop 0.12s ease-out;
+}
+
+/* @keyframes hitFlash {
+    0%   { box-shadow: 0 0 0 rgba(255, 0, 0, 0); transform: scale(1); }
+    50%  { box-shadow: 0 0 18px rgba(255, 0, 0, 0.9); transform: scale(0.97); }
+    100% { box-shadow: 0 0 0 rgba(255, 0, 0, 0); transform: scale(1); } */
+
+@keyframes hitPop {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(0.92);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.plus {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #ff3b3b;
+    font-weight: bold;
+    animation: floatUp 0.4s ease-out forwards;
+    pointer-events: none;
+    font-size: 1.5em;
+}
+
+@keyframes floatUp {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-12px);
+    }
+}

@@ -17,7 +17,11 @@
             <h2 class="papan-skor" x-text="skor">0</h2>
             <div class="container">
                 <template x-for="(item, index) in tanah" :key="index">
-                    <div class="tanah" :class="item.muncul ? 'muncul' : ''">
+                    <div
+                        class="tanah"
+                        :class="{muncul: item.muncul, hit: hitIndex === index}"
+                    >
+                        <span class="plus" x-show="hitIndex === index">+1</span>
                         <div class="tikus" @click="pukul(index)"></div>
                     </div>
                 </template>
@@ -32,6 +36,7 @@
                 skor: 0,
                 waktu: 10,
                 timerInterval: null,
+                hitIndex: null,
                 // Mengacak tanah yang akan muncul tikus dan tidak boleh sama dengan sebelumnya
                 randomTanah() {
                     let index;
@@ -83,6 +88,12 @@
                     this.$refs.pop.play();
                     this.tanah[index].muncul = false;
                     this.skor++;
+
+                    // 💥 trigger efek visual
+                    this.hitIndex = index;
+                    setTimeout(() => {
+                        this.hitIndex = null;
+                    }, 150);
                 },
             });
         </script>
